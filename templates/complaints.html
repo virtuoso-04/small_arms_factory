@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All Complaints - Small Arms Factory Kanpur</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='images/saf-logo.png') }}" type="image/png">
+</head>
+<body>
+    <header>
+        <img src="{{ url_for('static', filename='images/saf-logo.png') }}" alt="SAF Logo" class="logo">
+        <h1>All Complaints</h1>
+    </header>
+
+    <main>
+        {% if complaints %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Subject</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for complaint in complaints %}
+                        <tr>
+                            <td>{{ complaint.id }}</td>
+                            <td>{{ complaint.name }}</td>
+                            <td>{{ complaint.email }}</td>
+                            <td>{{ complaint.subject }}</td>
+                            <td>{{ complaint.description }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No complaints have been submitted yet.</p>
+        {% endif %}
+    </main>
+
+    <footer>
+        <p>&copy; {{ current_year }} Small Arms Factory Kanpur. All rights reserved.</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

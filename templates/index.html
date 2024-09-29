@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Small Arms Factory Kanpur - Complaint Management</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='images/saf-logo.png') }}" type="image/png">
+</head>
+<body>
+    <header>
+        <img src="{{ url_for('static', filename='images/saf-logo.png') }}" alt="SAF Logo" class="logo">
+        <h1>Small Arms Factory Kanpur</h1>
+    </header>
+
+    <main>
+        <h2>Submit a Complaint</h2>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="flash {{ category }}">{{ message }}</div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+        <form method="POST" action="{{ url_for('index') }}">
+            {{ form.hidden_tag() }}
+            <div class="form-group">
+                {{ form.name.label }}<br>
+                {{ form.name(size=40) }}<br>
+                {% for error in form.name.errors %}
+                    <span class="error">{{ error }}</span>
+                {% endfor %}
+            </div>
+            <div class="form-group">
+                {{ form.email.label }}<br>
+                {{ form.email(size=40) }}<br>
+                {% for error in form.email.errors %}
+                    <span class="error">{{ error }}</span>
+                {% endfor %}
+            </div>
+            <div class="form-group">
+                {{ form.subject.label }}<br>
+                {{ form.subject(size=60) }}<br>
+                {% for error in form.subject.errors %}
+                    <span class="error">{{ error }}</span>
+                {% endfor %}
+            </div>
+            <div class="form-group">
+                {{ form.description.label }}<br>
+                {{ form.description(rows=5, cols=60) }}<br>
+                {% for error in form.description.errors %}
+                    <span class="error">{{ error }}</span>
+                {% endfor %}
+            </div>
+            <div class="form-group">
+                {{ form.submit(class="btn") }}
+            </div>
+        </form>
+    </main>
+
+    <footer>
+        <p>&copy; {{ current_year }} Small Arms Factory Kanpur. All rights reserved.</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
